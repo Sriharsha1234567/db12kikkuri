@@ -9,6 +9,8 @@ var usersRouter = require('./routes/users');
 var snakeRouter = require('./routes/snake');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var Costume = require("./models/costume"); 
+var resourceRouter = require('./routes/resource');
 var app = express();
 
 // view engine setup
@@ -26,6 +28,7 @@ app.use('/users', usersRouter);
 app.use('/snake', snakeRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,4 +46,27 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const connectionString =  process.env.MONGO_CON 
+mongoose = require('mongoose'); 
+mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true});
+
+async function recreateDB(){
+  // Delete everything
+  await Costume.deleteMany();
+ 
+ 
+  var results = [{"name":"Asmodeus","color":'brown',"weight":30},
+                 {"name":"Severus","color":'black',"weight":25},
+                 {"name":"Bowie", "color":'gold',"weight":40}]
+ 
+ for(i in results){
+  let instance = new Costume({name: results[i]["name"], color: results[i]["color"], weight:results[i]["weight"]});
+   instance.save( function(err,doc) {
+     if(err) return console.error(err);
+     console.log("object added.")
+     });
+ } 
+ } 
+ let reseed = true;
+ if (reseed) { recreateDB();} 
 module.exports = app;
