@@ -17,10 +17,27 @@ exports.snake_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: snake detail: ' + req.params.id); 
 }; 
  
-// Handle snake create on POST. 
-exports.snake_create_post = function(req, res) { 
-    res.send('NOT IMPLEMENTED: snake create POST'); 
+// Handle Costume create on POST. 
+exports.snake_create_post = async function(req, res) { 
+    console.log(req.body) 
+    let document = new snake(); 
+    // We are looking for a body, since POST does not have query parameters. 
+    // Even though bodies can be in many different formats, we will be picky 
+    // and require that it be a json object 
+    // {"costume_type":"goat", "cost":12, "size":"large"} 
+    document.name = req.body.name; 
+    document.color = req.body.color; 
+    document.weight = req.body.weight; 
+    try{ 
+        let result = await document.save(); 
+        res.send(result); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
 }; 
+  
  
 // Handle snake delete form on DELETE. 
 exports.snake_delete = function(req, res) { 
