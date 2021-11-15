@@ -53,9 +53,24 @@ exports.snake_delete = function(req, res) {
 }; 
  
 // Handle snake update form on PUT. 
-exports.snake_update_put = function(req, res) { 
-    res.send('NOT IMPLEMENTED: snake update PUT' + req.params.id); 
-};
+exports.snake_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await snake.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.snake_type)  toUpdate.name = req.body.name; 
+        if(req.body.color) toUpdate.cost = req.body.color; 
+        if(req.body.weight) toUpdate.size = req.body.weight; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
+}; 
 
 // VIEWS 
 // Handle a show all view 
