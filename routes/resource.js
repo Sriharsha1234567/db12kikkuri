@@ -3,29 +3,29 @@ var router = express.Router();
  
 // Require controller modules. 
 var api_controller = require('../controllers/api'); 
-var costume_controller = require('../controllers/costume'); 
+var snake_controller = require('../controllers/snake'); 
  
 /// API ROUTE /// 
  
 // GET resources base. 
 router.get('/', api_controller.api); 
  
-/// COSTUME ROUTES /// 
+/// snake ROUTES /// 
  
-// POST request for creating a Costume.  
-router.post('/costumes', costume_controller.costume_create_post); 
+// POST request for creating a snake.  
+router.post('/snake', snake_controller.snake_create_post); 
  
-// DELETE request to delete Costume. 
-router.delete('/costumes/:id', costume_controller.costume_delete); 
+// DELETE request to delete snake. 
+router.delete('/snake/:id', snake_controller.snake_delete); 
  
-// PUT request to update Costume. 
-router.put('/costumes/:id', 
-costume_controller.costume_update_put); 
+// PUT request to update snake. 
+router.put('/snake/:id', 
+snake_controller.snake_update_put); 
  
-// GET request for one Costume. 
-router.get('/costumes/:id', costume_controller.costume_detail); 
+// GET request for one snake. 
+router.get('/snake/:id', snake_controller.snake_detail); 
  
-// GET request for list of all Costume items. 
-router.get('/costumes', costume_controller.costume_list); 
+// GET request for list of all snake items. 
+router.get('/snake', snake_controller.snake_list); 
  
 module.exports = router;

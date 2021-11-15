@@ -1,33 +1,16 @@
 extends layout
 
 block content
-  h1= title  
+  h1= title
+  - let items = results
+  p Search Results Snakes 
   p 
   div(class="container-fluid")
         div(class="row")
-            -
-                let snake = [
-                    {
-                        "name": "cobra",
-                        "color": "black" ,
-                        "weight": 30
-                    },
-                    {
-                        "name": "busss",
-                        "color": "brown" ,
-                        "weight": 25
-                    },
-                    {
-                        "name": "anaconda",
-                        "color": "white" ,
-                        "weight": 40
-                    },                   
-                ]
-            each v,index in snake 
+            each v,index in items 
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.name}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.weight}
-
   script.                
         function buy(intemNo)
         {

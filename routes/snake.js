@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('snake', { title: 'search results for snake' });
-});
-
-module.exports = router;
+var express = require('express'); 
+const snake_controlers= require('../controllers/snake'); 
+var router = express.Router(); 
+ 
+/* GET costumes */ 
+router.get('/', snake_controlers.snake_view_all_Page ); 
+module.exports = router; 

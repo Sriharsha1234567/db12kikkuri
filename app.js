@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 var snakeRouter = require('./routes/snake');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
-var Costume = require("./models/costume"); 
+var snake = require("./models/snake"); 
 var resourceRouter = require('./routes/resource');
 var app = express();
 
@@ -52,7 +52,7 @@ mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: t
 
 async function recreateDB(){
   // Delete everything
-  await Costume.deleteMany();
+  await snake.deleteMany();
  
  
   var results = [{"name":"Asmodeus","color":'brown',"weight":30},
@@ -60,7 +60,7 @@ async function recreateDB(){
                  {"name":"Bowie", "color":'gold',"weight":40}]
  
  for(i in results){
-  let instance = new Costume({name: results[i]["name"], color: results[i]["color"], weight:results[i]["weight"]});
+  let instance = new snake({name: results[i]["name"], color: results[i]["color"], weight:results[i]["weight"]});
    instance.save( function(err,doc) {
      if(err) return console.error(err);
      console.log("object added.")
