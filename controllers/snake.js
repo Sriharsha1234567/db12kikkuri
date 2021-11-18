@@ -105,3 +105,29 @@ exports.snake_view_one_Page = async function(req, res) {
         res.send(`{'error': '${err}'}`); 
     } 
 }; 
+// Handle building the view for creating a snake. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.snake_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('snakecreate', { title: 'snake Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+};
+// Handle building the view for updating a snake. 
+// query provides the id 
+exports.snake_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await snake.findById(req.query.id) 
+        res.render('snakeupdate', { title: 'snake Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+};  

@@ -1,0 +1,43 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let snakeid = toShow._id 
+  - let name = toShow.name 
+  - let color = toShow.weight 
+  - let weight = toShow.color 
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{snakeid} 
+  - let actionid = "/resource/snake/" + snakeid 
+  form(id='snakeForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.snakeAttr(for='name') snake name 
+        input#name(type='text', name='name', value= name ) 
+    div.form-group 
+        label.snakeAttr(for='color') snake color 
+        input#color(type='text', name='color', value= weight ) 
+    div.form-group 
+        label.snakeAttr(for='weight') snake weight 
+        input#weight(type='number', name='weight', value= color ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['snakeForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 
