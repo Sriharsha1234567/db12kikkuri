@@ -2,21 +2,23 @@ extends layout
  
 block content 
   h1= title 
- 
-  - let snakeid = toShow._id 
-  - let name = toShow.name 
-  - let color = toShow.color 
-  - let weight = toShow.weight
-  div 
-    div.row 
-      div(class='snakeAttr mr-3') snake ID is: 
-      div #{snakeid} 
-    div.row 
-      div(class='snakeAttr mr-3') snake name is: 
-      div #{name} 
-    div.row 
-      div(class='snakeAttr mr-3') snake color is: 
-      div #{color} 
-    div.row 
-      div(class='snakeAttr mr-3') snake weight is: 
-      div #{weight} 
+  if (toShow == null) 
+    h2 No instance to show 
+  else 
+    - let snakeid = toShow._id 
+    - let name = toShow.name 
+    - let color = toShow.color 
+    - let weight = toShow.weight 
+    div 
+      div.row 
+        div(class='snakeAttr mr-3') snake ID is: 
+        div #{snakeid} 
+      div.row 
+        div(class='snakeAttr mr-3') snake name is: 
+        div #{name} 
+      div.row 
+        div(class='snakeAttr mr-3') snake color is: 
+        div #{color} 
+      div.row 
+        div(class='snakeAttr mr-3') snake weight is: 
+        div #{weight}
