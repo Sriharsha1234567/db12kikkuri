@@ -2,17 +2,29 @@ extends layout
 
 block content
   h1= title
-  - let items = results
-  p Search Results Snakes 
-  p 
-  div(class="container-fluid")
-        div(class="row")
-            each v,index in items 
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.name}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.weight}
-  script.                
-        function buy(intemNo)
-        {
-              alert(`you purchased Item ${intemNo+1}`)
-        }
+  //- - let items = ['gas_type','quantity','cost']
+  - let items = results;
+  - let o;
+  script.
+    function buy(x){
+      alert('purchased item ' + x)
+   } 
+  div(class='container-fluid')
+    div(class='row m-1')
+    div(class="row row-cols-1 row-cols-sm-4 g-6")
+      each item, index in items
+        - let destination = `dispatch(\"/snake/update?id=${item._id}\")`
+         - let details = `dispatch(\"/snake/detail?id=${item._id}\")`
+
+        div(class="card text-white bg-secondary mb-3" class='col' class='card' class='card-body' class='card-text' onclick='buy('+index+')') Item #{item.name}(#{item.color})is #{item.weight}
+          <br><br>
+          span(class="btn btn-info", onclick= details) Details
+          <br>
+          a(class="btn btn-danger", href="/snake/delete/?id="+item._id) Delete
+          <br>
+
+          button.btn( class="btn-success ml-1", onclick= destination) Update
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }

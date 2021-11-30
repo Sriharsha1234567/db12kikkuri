@@ -5,7 +5,7 @@ block content
   p Welcome to  Sri harsha kikkuri  #{title}
   button(type="button", class="btn btn-secondary", onclick="update()") Press Me
   div(id="target") Display
-  a(href = '/snake') Snake Page link
+  a(href = '/snake') Snake Page link <br>
   |
   script. 
     let client_count = 0;
@@ -13,3 +13,13 @@ block content
       client_count = client_count + 1;
       document.getElementById("target").innerHTML = `Value now ${client_count}`  ;
       }
+      
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/snake") Take me to Snake
+    br
+    a(href="/logout") Logout
